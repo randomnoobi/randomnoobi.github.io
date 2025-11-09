@@ -1,149 +1,184 @@
-/* General Reset */
-* {
+/* ===== Base & Variables ===== */
+:root{
+  --bg: #1c1c1e;
+  --panel: #2a2a2e;
+  --text: #f0f0f5;
+  --muted: #aaa;
+  --accent-1: #61dafb;
+  --accent-2: #ffcc70;
+  --accent-3: #f093fb;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0,0,0,.25);
+}
+
+*{ box-sizing: border-box; }
+html,body{ height: 100%; }
+body{
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #1c1c1e;
-  color: #f0f0f5;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
-  padding: 20px;
 }
 
-header {
+/* Typography */
+h1{
+  font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
+  line-height: 1.2;
+  color: var(--accent-1);
+  margin: 0 0 .3em;
+}
+h2{
+  font-size: clamp(1.4rem, 1.2vw + 1rem, 2rem);
+  color: var(--accent-2);
+  margin: 0 0 .6rem;
+}
+h3{
+  font-size: clamp(1.05rem, .6vw + .9rem, 1.25rem);
+  color: var(--accent-3);
+  margin: 0 0 .25rem;
+}
+p{ margin: 0; }
+
+/* Containers */
+.container{
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+  padding: 24px 0;
+}
+
+/* Header/Footer */
+.site-header{
   text-align: center;
-  margin-bottom: 40px;
+  padding-top: 32px;
+  padding-bottom: 8px;
+}
+.site-footer{
+  text-align: center;
+  padding: 48px 0 24px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.site-footer a{
+  color: var(--accent-1);
+  text-decoration: none;
+}
+.site-footer a:hover{ text-decoration: underline; }
+
+/* ===== Cards / Projects ===== */
+.card-grid{
+  display: grid;
+  gap: 20px;
+  /* Responsive, non-overlapping layout */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  align-items: stretch;
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #61dafb;
+.card{
+  display: block;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transform: translateZ(0); /* enable GPU compositing */
+  transition: transform .15s ease, box-shadow .15s ease;
+  will-change: transform;
 }
+.card[aria-disabled="true"]{ cursor: not-allowed; opacity: .85; }
 
-h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #ffcc70;
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
 }
-
-h3 {
-  font-size: 1.3rem;
-  color: #f093fb;
-}
-
-/* Default gallery images (screenshots) */
-.gallery img {
+.card figure{ margin: 0; display: grid; gap: 12px; }
+.card img{
   width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-}
-
-/* Devlog code blocks */
-.code pre {
-  background-color: #2a2a2e;
-  padding: 15px;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-  margin-top: 10px;
-  color: #c3f3c3;
-}
-
-/* Week 1 GIFs */
-.small-gif {
-  max-width: 15%;
   height: auto;
+  display: block;
+  /* Let non-pixel art remain smooth */
+  image-rendering: auto;
+  aspect-ratio: 16 / 9;         /* prevents CLS if width/height missing */
+  object-fit: cover;
+}
+.card figcaption{
+  padding: 12px 14px 16px;
+}
+
+/* ===== Pixel-art utility ===== */
+.pixel-art{
+  /* Only apply to pixel art images */
   image-rendering: pixelated;
+  image-rendering: crisp-edges; /* fallback */
+}
+
+/* ===== Devlog blocks / code ===== */
+.log article{
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--panel);
+  border-left: 4px solid var(--accent-2);
+  border-radius: var(--radius);
+}
+.code pre{
+  background: var(--panel);
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #c3f3c3;
+  margin-top: 10px;
+}
+
+/* Small inline GIFs */
+.small-gif{
+  max-width: 180px;
+  height: auto;
   display: block;
   margin: 10px auto;
 }
 
-/* Devlog articles */
-.log article {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #2a2a2e;
-  border-left: 4px solid #ffcc70;
-  border-radius: 6px;
-}
-
-/* Collapsible details */
-details {
-  background-color: #2a2a2e;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-summary {
-  font-weight: bold;
-  color: #ffcc70;
-  margin-bottom: 10px;
-  outline: none;
-}
-
-details[open] summary {
-  color: #61dafb;
-}
-
-/* Project cards */
-.project-list {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.project-card {
-  background-color: #2a2a2e;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  width: 250px;
-  transition: transform 0.2s ease;
-}
-
-.project-card img {
-  width: 100%;
-  border-radius: 6px;
-  image-rendering: pixelated;
-}
-
-.project-card:hover {
-  transform: scale(1.05);
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 60px;
-  color: #aaa;
-  font-size: 0.9rem;
-}
-
-footer a {
-  color: #61dafb;
-  text-decoration: none;
-}
-
-/* === Grid for Week 3+ sprites === */
-.gallery .grid {
+/* ===== Gallery (Sprite Grid) ===== */
+.gallery{ margin-top: 36px; }
+.gallery .grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px); /* fixed 150px cells */
   gap: 20px;
-  justify-content: center;
+  /* Responsive cells that never overlap */
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  justify-items: center;
 }
 
-.gallery .grid .sprite-img {
-  width: 250px !important;
-  height: 250px !important;
-  object-fit: contain;
-  image-rendering: pixelated;
-  background-color: #1c1c1e; /* frame background */
-  border-radius: 6px;
+/* Square frames for sprites, fully contained */
+.sprite-img{
+  width: 100%;
+  max-width: 240px;        /* cap size on large screens */
+  aspect-ratio: 1 / 1;     /* square tiles */
+  object-fit: contain;     /* contain the sprite */
+  background: var(--bg);   /* frame background */
+  border-radius: 8px;
+  display: block;
+  box-shadow: var(--shadow);
+}
+
+/* ===== Collapsible details ===== */
+details{
+  background: var(--panel);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  margin-top: 12px;
+}
+summary{
+  font-weight: 700;
+  color: var(--accent-2);
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+details[open] summary{ color: var(--accent-1); }
+
+/* ===== Misc ===== */
+img{ max-inline-size: 100%; block-size: auto; }
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
 }
