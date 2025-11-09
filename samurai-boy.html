@@ -2,191 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sam Wang | Game Dev Portfolio</title>
+
+  <!-- Performance: preconnect + single font request -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="Sam Wang’s game dev log with screenshots, sprite gallery, and code snippets." />
 </head>
 <body>
-  <header>
-    <h1> Sam Wang’s Game Dev Log</h1>
+  <header class="site-header container">
+    <h1>Sam Wang’s Game Dev Log</h1>
     <p>Documenting my journey in making games, art, and more.</p>
   </header>
 
-  <main>
-    <h2> Screenshots </h2> 
-      <img src= "Game Example.png" alt="Screenshot of game running" class="img" />
-      <section class="gallery sprites">
-    <h2>Sprite Assets</h2>
-    <div class="grid">
-      <img src="Box.png" alt="Box" class="sprite-img" />
-      <img src="Trapdoor-Sheet.png" alt="Trap" class="sprite-img" />
-      <img src="Sign.png" alt="Climbable Rope" class="sprite-img" />
-      <img src="Gate-Sheet.png" alt="Gate" class="sprite-img" />
-      <img src="Button-Sheet.png" alt="Trapdoor" class="sprite-img" />
-      <img src="Dialouge Portrait.png" alt="Dialogue Portrait" class="sprite-img" />
-      <img src="Samurai Boy Idle.gif" alt="Idle animation" class="sprite-img" />
-      <img src="Samurai Boy Run.gif" alt="Run animation" class="sprite-img" />
-      <img src="Samurai Boy Jump.gif" alt="Jump animation" class="sprite-img" />
-      <img src="Samurai Boy Climb.gif" alt="Climb animation" class="sprite-img" />
-      <img src="Samurai Boy Push.gif" alt="Pushing animation" class="sprite-img" />
-    </div>
-  </section>
-    <section class="log">
-      <h2> Devlog</h2>
-        <article>
-            <h3>8/7/25 Week 1: Learning pixel art animations...</h3>
-            <p>This week, I focused on learning the fundamentals of pixel art animation and implementing them in my game. I created a full animation set for my player character, including idle, run, jump, fall, climb, and push animations, each designed frame-by-frame and tested in Unity. I also learned how to build and organize a tileset, which I used to create my first playable environments. Using Unity’s animation controller and C# scripting, I successfully coded state transitions to ensure each animation responds accurately to player input and movement. Finally, I designed and tested the first two levels of the game, focusing on flow, platform placement, and basic climbing mechanics.</p>
-      </article>
-          
-          <article>
-            <h3>8/15/25 Week 2: Creating Levels and advancing gameplay</h3>
-            <p>This week I focused on building out Levels 3–4 and tightening the animation system. For levels, I iterated on difficulty curves, introducing new hazards one at a time (spikes, and box puzzles). I refined tileset usage to avoid collider bugs. On the animation side, I cleaned up the Animator state machine and transition conditions—smoothing swaps between idle/run/jump/fall/climb/push, fixing snap-backs on landings, and syncing footstep and ledge-grab events with animation timings. I also tweaked climb speed and push resistance.</p>
-          </article>
-          
-      <article>
-            <h3>8/22/25 Week 3: In-game mechanics</h3>
-            <p>This week I focused on the small in game mechanics built into my game. This includes, pushable boxes, shooting traps, climbable ropes, gates, trapdoors. I drew sprites and implemented them into the game.</p>
-            
+  <main class="container">
+    <!-- Screenshots -->
+    <section class="screens">
+      <h2>Screenshots</h2>
+      <figure>
+        <img
+          src="Game Example.png"
+          alt="Screenshot of game running"
+          loading="lazy"
+          width="1280" height="720"
+        />
+      </figure>
+    </section>
 
-      </article>
+    <!-- Sprite Gallery -->
+    <section class="gallery sprites">
+      <h2>Sprite Assets</h2>
+      <div class="grid">
+        <!-- Add class="pixel-art" to keep crisp edges -->
+        <img src="Box.png"                alt="Box"                 class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Trapdoor-Sheet.png"     alt="Trapdoor sheet"      class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Sign.png"               alt="Sign"                class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Gate-Sheet.png"         alt="Gate sheet"          class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Button-Sheet.png"       alt="Button sheet"        class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Dialouge Portrait.png"  alt="Dialogue portrait"   class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Samurai Boy Idle.gif"   alt="Idle animation"      class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Samurai Boy Run.gif"    alt="Run animation"       class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Samurai Boy Jump.gif"   alt="Jump animation"      class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Samurai Boy Climb.gif"  alt="Climb animation"     class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+        <img src="Samurai Boy Push.gif"   alt="Push animation"      class="sprite-img pixel-art" loading="lazy" width="256" height="256">
+      </div>
+    </section>
+
+    <!-- Devlog -->
+    <section class="log">
+      <h2>Devlog</h2>
+
       <article>
-            <h3>9/24/25 Week 4: Parallax Background, in game dialouge</h3>
-            <p>This week I focused on making a parallax background to go with my game, I fixed some small bugs with the collider on the tilemap, and I made and animated a dialouge manager for my game.</p>
+        <h3>8/7/25 Week 1: Learning pixel art animations…</h3>
+        <p>This week, I focused on learning the fundamentals of pixel art animation and implementing them in my game. I created a full animation set for my player character, including idle, run, jump, fall, climb, and push animations, each designed frame-by-frame and tested in Unity. I also learned how to build and organize a tileset, which I used to create my first playable environments. Using Unity’s animation controller and C# scripting, I successfully coded state transitions to ensure each animation responds accurately to player input and movement. Finally, I designed and tested the first two levels of the game, focusing on flow, platform placement, and basic climbing mechanics.</p>
+      </article>
+
+      <article>
+        <h3>8/15/25 Week 2: Creating levels and advancing gameplay</h3>
+        <p>This week I focused on building out Levels 3–4 and tightening the animation system. For levels, I iterated on difficulty curves, introducing new hazards one at a time (spikes, and box puzzles). I refined tileset usage to avoid collider bugs. On the animation side, I cleaned up the Animator state machine and transition conditions—smoothing swaps between idle/run/jump/fall/climb/push, fixing snap-backs on landings, and syncing footstep and ledge-grab events with animation timings. I also tweaked climb speed and push resistance.</p>
+      </article>
+
+      <article>
+        <h3>8/22/25 Week 3: In-game mechanics</h3>
+        <p>This week I focused on the small in-game mechanics built into my game. This includes pushable boxes, shooting traps, climbable ropes, gates, and trapdoors. I drew sprites and implemented them into the game.</p>
+      </article>
+
+      <article>
+        <h3>9/24/25 Week 4: Parallax background, in-game dialogue</h3>
+        <p>This week I focused on making a parallax background to go with my game, I fixed some small bugs with the collider on the tilemap, and I made and animated a dialogue manager for my game.</p>
       </article>
     </section>
+
+    <!-- Code -->
     <section class="code">
       <h2>Code</h2>
-        <details>
-          <summary>Movement Script</summary>
-            <pre><code>
-                using UnityEngine;
-                
-                public class MovementScript : MonoBehaviour
-                {
-                    public float speed = 5f;
-                    public float jumpHeight = 5f;
-                    public float climbSpeed = 3f;
-                    bool grounded = false;
-                    public bool jumping;
-                    public LayerMask wallMask;
-                    public Transform wallCheck;
-                    public float wallCheckRadius = 0.1f;
-                    public LayerMask groundMask;
-                    public Transform groundCheck;
-                    public float groundCheckRadius = 0.1f;
-                    public Transform pushCheck;
-                    public float pushCheckRadius = 0.2f;
-                    public LayerMask pushableMask;
-                    public Rigidbody2D rb2d;
-                    private Animator animator; // Reference to the Animator component
-                    private SpriteRenderer spriteRenderer;
-                    private bool isTouchingWall = false;
-                    private float defaultGravity;
-                
-                    // Start is called once before the first execution of Update after the MonoBehaviour is created
-                    void Start()
-                    {
-                        rb2d = GetComponent();
-                
-                        animator = transform.Find("Visuals").GetComponent();
-                
-                        spriteRenderer = transform.Find("Visuals").GetComponent();
-                
-                        defaultGravity = rb2d.gravityScale;
-                
-                    }
-                
-                    // Update is called once per frame
-                    void Update()
-                    {
-                        float move = Input.GetAxisRaw("Horizontal");
-                        float vertical = Input.GetAxisRaw("Vertical");
-                
-                        // Apply basic movement
-                        rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y);
-                
-                        // Ground and wall checks
-                        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);
-                        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallMask);
-                
-                        // === Wall Climbing Trigger ===
-                        bool pressingIntoWall = (isTouchingWall && move != 0 &&
-                            ((spriteRenderer.flipX && move < 0) || (!spriteRenderer.flipX && move > 0)));
-                
-                        bool isClimbing = !grounded && pressingIntoWall;
-                
-                        if (isClimbing)
-                        {
-                            // Stick to wall vertically
-                            rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, climbSpeed); // or climbSpeed if you want vertical motion
-                            rb2d.gravityScale = 0;
-                        }
-                        else
-                        {
-                            rb2d.gravityScale = defaultGravity;
-                        }
-                
-                        // === Jumping ===
-                        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
-                        {
-                            float jumpForce = Mathf.Sqrt(2f * Physics2D.gravity.magnitude * rb2d.gravityScale * jumpHeight) * rb2d.mass;
-                            rb2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-                        }
-                       bool isTouchingPushable = Physics2D.OverlapCircle(pushCheck.position, pushCheckRadius, pushableMask);
-                
-                        // Are we actively pushing into the box (moving into it)?
-                        bool pushingIntoBox =
-                            isTouchingPushable &&
-                            Mathf.Abs(move) > 0.1f &&
-                            ((spriteRenderer.flipX && move < 0) || (!spriteRenderer.flipX && move > 0));
-                
-                        // Flip sprite
-                        if (move > 0) spriteRenderer.flipX = false;
-                        else if (move < 0) spriteRenderer.flipX = true;
-                
-                        // Animator sync
-                        bool isMoving = Mathf.Abs(move) > 0.1f;
-                        bool isJumping = !grounded && rb2d.linearVelocity.y > 0.1f;
-                        bool isFalling = !grounded && rb2d.linearVelocity.y < -0.1f;
-                
-                        animator.SetBool("isMoving", isMoving);
-                        animator.SetBool("isJumping", isJumping);
-                        animator.SetBool("isFalling", isFalling);
-                        animator.SetBool("isClimbing", isClimbing);
-                        animator.SetBool("isPushing", pushingIntoBox);
-                    }
-                
-                    private void OnDrawGizmos()
-                    {
-                        // Draw a visual representation of the ground check radius in the editor
-                        if (groundCheck != null)
-                        {
-                            Gizmos.color = Color.red;
-                            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-                        }
-                        if (wallCheck != null)
-                        {
-                            Gizmos.color = Color.blue;
-                            Gizmos.DrawWireSphere(wallCheck.position, wallCheckRadius);
-                        }
-                        if (pushCheck != null)
-                        {
-                            Gizmos.color = Color.green;
-                            Gizmos.DrawWireSphere(pushCheck.position, pushCheckRadius);
-                        }
-                    }
-                }
-            </code></pre>
-        </details>
-    </section>
+      <details>
+        <summary>Movement Script</summary>
+        <pre><code>
+using UnityEngine;
 
+public class MovementScript : MonoBehaviour
+{
+    public float speed = 5f;
+    public float jumpHeight = 5f;
+    public float climbSpeed = 3f;
+    bool grounded = false;
+    public bool jumping;
+    public LayerMask wallMask;
+    public Transform wallCheck;
+    public float wallCheckRadius = 0.1f;
+    public LayerMask groundMask;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.1f;
+    public Transform pushCheck;
+    public float pushCheckRadius = 0.2f;
+    public LayerMask pushableMask;
+    public Rigidbody2D rb2d;
+    private Animator animator; // Reference to the Animator component
+    private SpriteRenderer spriteRenderer;
+    private bool isTouchingWall = false;
+    private float defaultGravity;
+
+    void Start()
+    {
+        rb2d = GetComponent&lt;Rigidbody2D&gt;();
+
+        animator = transform.Find("Visuals").GetComponent&lt;Animator&gt;();
+
+        spriteRenderer = transform.Find("Visuals").GetComponent&lt;SpriteRenderer&gt;();
+
+        defaultGravity = rb2d.gravityScale;
+    }
+
+    void Update()
+    {
+        float move = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        // Apply basic movement
+        rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y);
+
+        // Ground and wall checks
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);
+        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallMask);
+
+        // === Wall Climbing Trigger ===
+        bool pressingIntoWall = (isTouchingWall && move != 0 &&
+            ((spriteRenderer.flipX && move &lt; 0) || (!spriteRenderer.flipX && move &gt; 0)));
+
+        bool isClimbing = !grounded && pressingIntoWall;
+
+        if (isClimbing)
+        {
+            // Stick to wall vertically
+            rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, climbSpeed);
+            rb2d.gravityScale = 0;
+        }
+        else
+        {
+            rb2d.gravityScale = defaultGravity;
+        }
+
+        // === Jumping ===
+        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            float jumpForce = Mathf.Sqrt(2f * Physics2D.gravity.magnitude * rb2d.gravityScale * jumpHeight) * rb2d.mass;
+            rb2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
+
+        bool isTouchingPushable = Physics2D.OverlapCircle(pushCheck.position, pushCheckRadius, pushableMask);
+
+        // Are we actively pushing into the box (moving into it)?
+        bool pushingIntoBox =
+            isTouchingPushable &&
+            Mathf.Abs(move) &gt; 0.1f &&
+            ((spriteRenderer.flipX && move &lt; 0) || (!spriteRenderer.flipX && move &gt; 0));
+
+        // Flip sprite
+        if (move &gt; 0) spriteRenderer.flipX = false;
+        else if (move &lt; 0) spriteRenderer.flipX = true;
+
+        // Animator sync
+        bool isMoving = Mathf.Abs(move) &gt; 0.1f;
+        bool isJumping = !grounded && rb2d.linearVelocity.y &gt; 0.1f;
+        bool isFalling = !grounded && rb2d.linearVelocity.y &lt; -0.1f;
+
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isJumping", isJumping);
+        animator.SetBool("isFalling", isFalling);
+        animator.SetBool("isClimbing", isClimbing);
+        animator.SetBool("isPushing", pushingIntoBox);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+        if (wallCheck != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(wallCheck.position, wallCheckRadius);
+        }
+        if (pushCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(pushCheck.position, pushCheckRadius);
+        }
+    }
+}
+        </code></pre>
+      </details>
+    </section>
   </main>
 
-  <footer>
-    <p>© 2025 Sam Wang • <a href="https://github.com/randomnoobi" target="_blank">GitHub</a></p>
+  <footer class="site-footer container">
+    <p>© 2025 Sam Wang • <a href="https://github.com/randomnoobi" target="_blank" rel="noopener">GitHub</a></p>
   </footer>
 </body>
 </html>
-
-
