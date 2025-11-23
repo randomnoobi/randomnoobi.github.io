@@ -8,33 +8,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>Sam Wang’s Game Dev Portfolio</h1>
-    <p>Documenting my journey in making games, art, and more.</p>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1>Sam Wang’s Game Dev Portfolio</h1>
+      <p>Documenting my journey in making games, art, and more.</p>
+    </div>
   </header>
 
+  <!-- Main content -->
   <main>
-    <section class="projects">
-      <h2>My Projects</h2>
-      <div class="project-list">
-        <a href="samurai-boy.html" class="project-card">
-          <h3>Shadows of the Shogun</h3>
-          <img src="Samurai Boy Idle.gif" alt="Samurai Boy idle animation">
-          <p>2D platformer with climbing, pushing, and pixel art animations.</p>
-        </a>
+    <div class="container">
+      <section class="projects">
+        <h2>My Projects</h2>
 
-        <!-- Future projects can be added here -->
-        <a href="#" class="project-card">
-          <h3>Coming Soon</h3>
-          <img src="your-screenshot-url.png" alt="Placeholder">
-          <p>More projects will be added to my portfolio.</p>
-        </a>
-      </div>
-    </section>
+        <div class="card-grid">
+          <!-- Project 1 -->
+          <a href="samurai-boy.html" class="card">
+            <figure>
+              <img src="Samurai Boy Idle.gif" alt="Samurai Boy idle animation" class="pixel-art small-gif">
+              <figcaption>
+                <h3>Shadows of the Shogun</h3>
+                <p>2D platformer with climbing, pushing, and pixel art animations.</p>
+              </figcaption>
+            </figure>
+          </a>
+
+          <!-- Future Project -->
+          <a href="#" class="card" aria-disabled="true">
+            <figure>
+              <img src="your-screenshot-url.png" alt="Placeholder screenshot">
+              <figcaption>
+                <h3>Coming Soon</h3>
+                <p>More projects will be added to my portfolio.</p>
+              </figcaption>
+            </figure>
+          </a>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2025 Sam Wang • <a href="https://github.com/randomnoobi" target="_blank">GitHub</a></p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Sam Wang • 
+        <a href="https://github.com/randomnoobi" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
+    </div>
   </footer>
 </body>
 </html>
