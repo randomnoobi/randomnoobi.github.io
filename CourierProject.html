@@ -71,9 +71,111 @@
     <section class="code">
       <h2>Code</h2>
       <details>
-        <summary></summary>
+        <summary>Dialouge Script</summary>
         <pre><code>
-          
+          using System;
+using UnityEngine;
+using TMPro;
+
+public class DialogueScript : MonoBehaviour
+{
+    [Header("UI")]
+    public GameObject dialoguePanel;   // assign the parent panel GameObject
+    public TMP_Text nameText;
+    public TMP_Text dialogueText;
+
+    [Header("Optional Prompt UI")]
+    public GameObject interactPrompt;
+
+    [Header("Close Lock")]
+    public float closeInputLock = 0.15f; // prevents immediate re-open on same E press
+
+    [Header("Open Lock")]
+    public float openInputLock = 0.1f;   // prevents instant advance on the same E press used to open
+    private float lastOpenTime = -999f;
+
+    private string[] lines;
+    private int index;
+    private bool dialogueActive = false;
+
+    private Action onDialogueFinished;
+
+    private float lastCloseTime = -999f;
+
+    public bool IsDialogueActive => dialogueActive;
+    public bool RecentlyClosed => Time.time < lastCloseTime + closeInputLock;
+
+    void Start()
+    {
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (interactPrompt != null) interactPrompt.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (!dialogueActive) return;
+
+        // NEW: ignore E briefly right after opening so it doesn't auto-skip to line 2
+        if (Time.time < lastOpenTime + openInputLock) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            AdvanceOrClose();
+        }
+    }
+
+    public void StartDialogue(string npcName, string[] dialogueLines, Action finishedCallback)
+    {
+        if (dialogueLines == null || dialogueLines.Length == 0) return;
+
+        dialogueActive = true;
+        lines = dialogueLines;
+        index = 0;
+        onDialogueFinished = finishedCallback;
+
+        // NEW: record open time so we can block the opening E press from advancing
+        lastOpenTime = Time.time;
+
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
+        if (nameText != null) nameText.text = npcName;
+        if (dialogueText != null) dialogueText.text = lines[index];
+
+        if (interactPrompt != null) interactPrompt.SetActive(false);
+    }
+
+    private void AdvanceOrClose()
+    {
+        // If currently showing the last line, pressing E accepts/callback then closes
+        if (index >= lines.Length - 1)
+        {
+            onDialogueFinished?.Invoke();
+            onDialogueFinished = null;
+
+            CloseDialogue();
+            return;
+        }
+
+        // Otherwise, go to next line
+        index++;
+        if (dialogueText != null) dialogueText.text = lines[index];
+    }
+
+    public void CloseDialogue()
+    {
+        dialogueActive = false;
+        lastCloseTime = Time.time;
+
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+    }
+
+    public void ShowInteractPrompt(bool show)
+    {
+        if (interactPrompt != null && !dialogueActive)
+            interactPrompt.SetActive(show);
+    }
+}
+
         </code></pre>
       </details>
     </section>
